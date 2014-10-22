@@ -1,0 +1,73 @@
+{% load url from future %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|slice:"2" }}" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta property="og:title" content="{% trans "My Brand" %}{% block og_title %}{% endblock %}" />
+        <title>{% block page_title_before %}{% endblock %}{% trans "Your Brand" %}{% block page_title_after %}{% endblock %}</title>
+    </head>
+
+    <body class="lang-{{ LANGUAGE_CODE }}">
+
+        <nav class="tbr wrp wrp-with-padding">
+            <ul id="TopBar">
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    {% if language.code != LANGUAGE_CODE %}
+                    <li class="tbr-item">
+                       {{ language.code }} - {{ language.name_local }}
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+
+        {% block content %}{% endblock %}
+
+
+        <footer class="ftr">
+            <div class="ftr-tdiscs">
+                <nav class="ftr-navigation wrp wrp-with-padding">
+                    <div class="ftr-sociallinks">
+                        <p class="ftr-title">{% trans "Stay Connected with us:" %}</p>
+                        <ul class="ftr-anchors">
+                            <li>
+                                <a class="ftr-facebook" data-ga-social="Facebook" data-ga-action="Visit" href="http://www.facebook.com/your_site" target="_blank">{% trans "Facebook" %}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="ftr-quicklinks">
+                        <ul class="ftr-anchors">
+                            <li>
+                                <a href="#">{% trans "Corporate Information" %}</a>
+                            </li>
+                            <li>
+                                <a href="{% ifequal LANGUAGE_CODE|slice:"2" "fr" %}http://some.site/fr/{% else %}http://www.some.site/en/{% endifequal %}" target="_blank" rel="nofollow">{% trans "Privacy Policy" %}</a>
+                            </li>
+
+
+                            <li>
+                                <a href="#">{% trans "Another Translation - February 2012" %}</a>
+                            </li>
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                {% if language.code != LANGUAGE_CODE %}
+                                <li>
+                                    <a href="#">{{ language.name_local }} {{ language.code }}</a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <p class="ftr-copyright">{% trans "&copy; 2014 COPYRIGHT" %}</p>
+                    </div>
+                </nav>
+            </div>
+        </footer>
+
+    </body>
+</html>

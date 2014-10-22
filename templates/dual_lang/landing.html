@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+
+
+{% block content %}
+    <div class="wrp wrp-with-content">
+        <div class="col col-with-span-two">
+            <ul id="FAQ">
+            {% for topic in topic_list %}
+                {% if topic.faq_items.all %}
+                <li>
+                    <h3 class="faq-topic">
+                        {{ topic.name }}
+                    </h3>
+                    <ul class="faq-items">
+                        {% for item in topic.faq_items.all %}
+                        <li>
+                            <h4>{{ item.question }}</h4>
+                            {{ item.answer }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+            <a class="faq-top" href="#">{% trans "Top" %}</a>
+        </div>
+    </div>
+{% endblock %}
+
+
