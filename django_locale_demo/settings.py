@@ -52,6 +52,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #'linguo',
+
     'home',
     'duallang',
 )
@@ -69,7 +72,9 @@ MIDDLEWARE_CLASSES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
-ugettext = lambda s: s
+
+#ugettext = lambda s: s
+from django.utils.translation import ugettext_lazy as ugettext
 LANGUAGES = (
     ('en', ugettext('English')),
     ('fr', ugettext('French')),
@@ -109,3 +114,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'  # TODO: on production (full URL to the media server)
+
+
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
+MEDIA_ROOT = os.path.join(PROJECT_PATH, '/served/media/')  # Uploaded content
+STATIC_ROOT = os.path.join(PROJECT_PATH, '/served/static/')  # Static files: css, js, images, etc.
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, '/static/'),
+)
+
