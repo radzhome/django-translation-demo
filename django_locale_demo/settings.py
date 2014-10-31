@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     #'linguo',
-    'rosetta',
+    #'rosetta',
     'solo',
 
     'home',
