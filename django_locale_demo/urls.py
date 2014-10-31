@@ -13,3 +13,10 @@ urlpatterns += i18n_patterns('',
     (_(r'^dual-lang/'), include('duallang.urls')),
     (r'^', include('home.urls')),
 )
+
+from django.conf import settings
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+        url(r'^rosetta/', include('rosetta.urls')),
+    )

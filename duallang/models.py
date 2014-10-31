@@ -4,6 +4,25 @@ from django.utils.translation import ugettext_lazy as _
 #from linguo.models import MultilingualModel
 #from linguo.managers import MultilingualManager
 
+from django.db import models
+from solo.models import SingletonModel
+
+
+class HomeCarousel(SingletonModel):
+
+    # class Meta:
+    #     verbose_name = 'Home Carousel'
+
+    def __unicode__(self):
+        return 'Home Carousel'
+
+
+class HomeSlide(models.Model):
+
+    carousel = models.ForeignKey(HomeCarousel)
+    label = models.CharField(max_length=255, unique=True)
+    text = models.TextField()
+
 
 class FAQTopic(models.Model): #MultilingualModel):
 
